@@ -101,36 +101,36 @@ km_labels = KMeans(k, random_state=42).fit_predict(z_scaled)
 adata_raw.obs["km_latent"] = km_labels.astype(str)        # str for palette
 
 # 4-A  UMAP scatter of clusters
-#sc.pl.embedding(adata_raw, basis="X_umap_latent",
- #               color="km_latent",
- #               size=20, legend_loc="on data", save="UMAPclusters.pdf")
+sc.pl.embedding(adata_raw, basis="X_umap_latent",
+               color="km_latent",
+               size=20, legend_loc="on data", save="UMAPclusters.pdf")
                 
-#sc.pl.embedding(adata_raw, basis="X_umap_latent",
- #               color="ground",
-  #              size=20, legend_loc="on data", save="UMAPlabelss.pdf")
+sc.pl.embedding(adata_raw, basis="X_umap_latent",
+               color="ground",
+               size=20, legend_loc="on data", save="UMAPlabelss.pdf")
 
-# 4-B  project clusters back to tissue
-#sc.pl.spatial(adata_raw, color="km_latent", size=1.4, alpha_img=0.5,
- #             palette="tab10", save="projectclusters.pdf")
+4-B  project clusters back to tissue
+sc.pl.spatial(adata_raw, color="km_latent", size=1.4, alpha_img=0.5,
+             palette="tab10", save="projectclusters.pdf")
 
-#sc.pl.spatial(adata_raw, color="ground", size=1.4, alpha_img=0.5,
- #             palette="tab10", save="projectlabels.pdf")
-# you can save figures:
-# plt.savefig("latent_umap_clusters.png", dpi=300, bbox_inches="tight")
-print(adata_raw)
-sq.pl.spatial_scatter(adata_raw, color=["ground","km_latent"], save="spatial_scatcomp.pdf")
+sc.pl.spatial(adata_raw, color="ground", size=1.4, alpha_img=0.5,
+             palette="tab10", save="projectlabels.pdf")
+you can save figures:
+plt.savefig("latent_umap_clusters.png", dpi=300, bbox_inches="tight")
+# print(adata_raw)
+# sq.pl.spatial_scatter(adata_raw, color=["ground","km_latent"], save="spatial_scatcomp.pdf")
 
-sq.pl.spatial_scatter(adata_raw,color=["RASGRF2","LAMP5","NEFH"],
-                      ncols=3,axis_label=["",""],size=1.5,colorbar =False, save="spat_scat.pdf")
+# sq.pl.spatial_scatter(adata_raw,color=["RASGRF2","LAMP5","NEFH"],
+#                       ncols=3,axis_label=["",""],size=1.5,colorbar =False, save="spat_scat.pdf")
                       
-sq.pl.spatial_scatter(adata_raw,color=["RASGRF2","LAMP5","NEFH"],
-                      ncols=3,axis_label=["",""],size=2,colorbar =False,layer="recon",save="spatial_scatGAT.pdf")
+# sq.pl.spatial_scatter(adata_raw,color=["RASGRF2","LAMP5","NEFH"],
+#                       ncols=3,axis_label=["",""],size=2,colorbar =False,layer="recon",save="spatial_scatGAT.pdf")
 
-adata_raw = adata_raw[adata_raw.obs.ground!="NA",:]
+# adata_raw = adata_raw[adata_raw.obs.ground!="NA",:]
 
-sc.pl.heatmap(adata_raw, var_names=["RASGRF2","LAMP5","NEFH"],
-              groupby='ground', cmap='viridis', dendrogram=False,swap_axes=True,
-              figsize=(6,3),save="heatmap.pdf")
+# sc.pl.heatmap(adata_raw, var_names=["RASGRF2","LAMP5","NEFH"],
+#               groupby='ground', cmap='viridis', dendrogram=False,swap_axes=True,
+#               figsize=(6,3),save="heatmap.pdf")
 
 sc.pl.heatmap(adata_raw, var_names=["RASGRF2","LAMP5","NEFH"],
               groupby='ground', cmap='viridis', dendrogram=False,swap_axes=True,
